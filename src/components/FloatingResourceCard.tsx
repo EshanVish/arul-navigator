@@ -5,14 +5,35 @@ interface FloatingResourceCardProps {
   icon: string;
   color: string;
   className?: string;
+  isActive?: boolean;
+  isMatched?: boolean;
+  isOrganized?: boolean;
+  onClick?: () => void;
 }
 
-export const FloatingResourceCard = ({ name, icon, color, className }: FloatingResourceCardProps) => {
+export const FloatingResourceCard = ({ 
+  name, 
+  icon, 
+  color, 
+  className,
+  isActive = false,
+  isMatched = false,
+  isOrganized = false,
+  onClick,
+}: FloatingResourceCardProps) => {
   return (
     <div
+      onClick={onClick}
       className={cn(
-        "flex items-center gap-3 px-4 py-3 bg-card rounded-xl shadow-card border border-border/50",
-        "opacity-60 hover:opacity-100 transition-opacity duration-300",
+        "flex items-center gap-3 px-4 py-3 bg-card rounded-xl shadow-card border transition-all duration-500",
+        isActive 
+          ? "border-ring ring-2 ring-ring shadow-lg opacity-100 scale-105 z-20" 
+          : isMatched 
+          ? "border-ring/50 opacity-100"
+          : isOrganized
+          ? "border-border opacity-90"
+          : "border-border/50 opacity-60",
+        onClick && "cursor-pointer hover:opacity-100",
         className
       )}
     >
