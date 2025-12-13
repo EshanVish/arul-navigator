@@ -8,14 +8,14 @@ const Landing = () => {
     <div className="min-h-screen gradient-sky flex flex-col items-center justify-center px-4">
       {/* Logo */}
       <div className="mb-8 animate-fade-in">
-        <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center">
-          <span className="text-primary-foreground font-serif text-2xl">A</span>
+        <div className="w-14 h-14 bg-primary rounded-xl flex items-center justify-center">
+          <span className="text-primary-foreground font-serif text-3xl">A</span>
         </div>
       </div>
 
       {/* Headline */}
       <h1 
-        className="text-4xl md:text-5xl font-serif text-foreground text-center mb-12 animate-fade-in"
+        className="text-4xl md:text-5xl font-serif text-foreground text-center mb-10 animate-fade-in"
         style={{ animationDelay: "0.1s" }}
       >
         The assistant for your<br />cancer journey.
@@ -65,25 +65,23 @@ const Landing = () => {
         <a href="#" className="underline hover:text-foreground transition-colors">Privacy Policy</a>.
       </p>
 
-      {/* Preview card - subtle at bottom */}
+      {/* Preview card - centered below content */}
       <div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 w-full max-w-xl px-4 animate-fade-in opacity-80"
+        className="mt-16 w-full max-w-2xl px-4 animate-fade-in"
         style={{ animationDelay: "0.5s" }}
       >
-        <div className="bg-card rounded-2xl shadow-soft border border-border p-4">
-          <div className="flex items-center gap-3">
-            <div className="flex gap-2">
-              <span className="px-3 py-1.5 bg-secondary rounded-full text-xs font-medium text-secondary-foreground flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-ring"></span>
-                Your Appointments
-              </span>
-              <span className="px-3 py-1.5 bg-secondary rounded-full text-xs font-medium text-secondary-foreground flex items-center gap-1">
-                <span className="w-2 h-2 rounded-full bg-accent"></span>
-                Resources Near You
-              </span>
-            </div>
+        <div className="bg-card rounded-2xl shadow-soft border border-border p-5">
+          <div className="flex items-center gap-3 mb-4">
+            <span className="px-4 py-2 bg-secondary rounded-full text-sm font-medium text-secondary-foreground flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-ring"></span>
+              Your Appointments
+            </span>
+            <span className="px-4 py-2 bg-secondary rounded-full text-sm font-medium text-secondary-foreground flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-accent"></span>
+              Resources Near You
+            </span>
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             type @ for context, / for actions...
           </p>
         </div>
