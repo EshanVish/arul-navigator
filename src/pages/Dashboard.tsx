@@ -10,6 +10,7 @@ import CommunityView from "@/components/CommunityView";
 import MentalHealthView from "@/components/MentalHealthView";
 import PeerNavigatorView from "@/components/PeerNavigatorView";
 import { NotificationBell } from "@/components/NotificationBell";
+import { NotificationToast } from "@/components/NotificationToast";
 import { SMSSetupDialog } from "@/components/SMSSetupDialog";
 import { Smartphone } from "lucide-react";
 import { NavigatorPromoCard } from "@/components/NavigatorPromoCard";
@@ -64,6 +65,9 @@ const Dashboard = () => {
       {tourStep !== null && (
         <div className="fixed inset-0 bg-black/60 z-40 transition-opacity duration-500" />
       )}
+
+      {/* iOS-style Notification Toasts */}
+      <NotificationToast />
 
       {/* Sidebar Wrapper for Highlight */}
       <div className={cn(

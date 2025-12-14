@@ -43,14 +43,20 @@ export const DashboardSidebar = ({ activeView, onViewChange }: DashboardSidebarP
         <button
           onClick={() => onViewChange("community")}
           className={cn(
-            "flex items-center gap-3 p-3 rounded-xl w-full",
+            "flex items-center gap-3 p-3 rounded-xl w-full relative",
             "text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent",
             "transition-all duration-200",
             activeView === "community" && "bg-sidebar-accent text-sidebar-primary"
           )}
           title="Community"
         >
-          <HeartHandshake className="w-5 h-5 min-w-[20px]" />
+          <div className="relative">
+            <HeartHandshake className="w-5 h-5 min-w-[20px]" />
+            {/* Notification Badge */}
+            <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+              <span className="text-[10px] font-bold text-white">3</span>
+            </div>
+          </div>
           <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap overflow-hidden">
             Community
           </span>
