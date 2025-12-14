@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 const navItems = [
   { id: "command-center", icon: Terminal, label: "Command Center" },
   { id: "peer-navigator", icon: UserCircle, label: "Peer Navigator" },
-  { id: "community", icon: HeartHandshake, label: "Community" },
   { id: "mental-health", icon: Brain, label: "Mental Health" },
 ];
 
@@ -39,7 +38,25 @@ export const DashboardSidebar = ({ activeView, onViewChange }: DashboardSidebarP
 
       <div className="flex-1" />
 
-      <div className="px-3">
+      <div className="px-3 flex flex-col gap-2">
+        {/* Community Button */}
+        <button
+          onClick={() => onViewChange("community")}
+          className={cn(
+            "flex items-center gap-3 p-3 rounded-xl w-full",
+            "text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent",
+            "transition-all duration-200",
+            activeView === "community" && "bg-sidebar-accent text-sidebar-primary"
+          )}
+          title="Community"
+        >
+          <HeartHandshake className="w-5 h-5 min-w-[20px]" />
+          <span className="text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap overflow-hidden">
+            Community
+          </span>
+        </button>
+
+        {/* Settings Button */}
         <button
           className={cn(
             "flex items-center gap-3 p-3 rounded-xl w-full",

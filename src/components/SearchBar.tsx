@@ -38,7 +38,13 @@ export const SearchBar = () => {
       </div>
 
       <div className="relative w-full">
-        <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-2 w-full justify-center md:justify-start">
+        {/* Left blur edge */}
+        <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-background via-background/50 to-transparent z-10 pointer-events-none" />
+
+        {/* Right blur edge */}
+        <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-background via-background/50 to-transparent z-10 pointer-events-none" />
+
+        <div className="flex items-center gap-3 overflow-x-auto no-scrollbar py-2 w-full justify-center md:justify-start px-8">
           {quickActions.map((action) => (
             <button
               key={action.label}
