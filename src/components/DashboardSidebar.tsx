@@ -1,9 +1,11 @@
-import { Clock, Users, Calendar, MessageSquare, Grid3X3, Settings, HeartHandshake } from "lucide-react";
+import { Clock, Users, Calendar, MessageSquare, Grid3X3, Settings, HeartHandshake, Brain, Terminal, UserCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { id: "navigator", icon: Users, label: "Personal Navigator" },
+  { id: "command-center", icon: Terminal, label: "Command Center" },
+  { id: "peer-navigator", icon: UserCircle, label: "Peer Navigator" },
   { id: "community", icon: HeartHandshake, label: "Community" },
+  { id: "mental-health", icon: Brain, label: "Mental Health" },
 ];
 
 type DashboardSidebarProps = {

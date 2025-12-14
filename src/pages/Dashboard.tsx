@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { Check, Mail, Loader2, ArrowRight, Users, Plus } from "lucide-react";
 import BookingWizard from "@/components/BookingWizard";
 import CommunityView from "@/components/CommunityView";
+import MentalHealthView from "@/components/MentalHealthView";
+import PeerNavigatorView from "@/components/PeerNavigatorView";
 import { NotificationBell } from "@/components/NotificationBell";
 import { SMSSetupDialog } from "@/components/SMSSetupDialog";
 import { Smartphone } from "lucide-react";
@@ -54,7 +56,7 @@ const Dashboard = () => {
   };
 
   // State for View Switching
-  const [currentView, setCurrentView] = useState("navigator");
+  const [currentView, setCurrentView] = useState("command-center");
 
   return (
     <div className="min-h-screen flex w-full relative overflow-hidden">
@@ -91,8 +93,8 @@ const Dashboard = () => {
           <NotificationBell />
         </div>
 
-        {/* VIEW: Personal Navigator (Home) */}
-        {currentView === "navigator" && (
+        {/* VIEW: Command Center (Home) */}
+        {currentView === "command-center" && (
           <>
             {/* Email Task Status */}
             <div className="absolute top-4 left-0 right-0 flex justify-center z-30 px-4 animate-in slide-in-from-top-8 fade-in duration-1000 ease-out">
@@ -240,6 +242,16 @@ const Dashboard = () => {
         {/* VIEW: Community */}
         {currentView === "community" && (
           <CommunityView />
+        )}
+
+        {/* VIEW: Mental Health */}
+        {currentView === "mental-health" && (
+          <MentalHealthView />
+        )}
+
+        {/* VIEW: Peer Navigator */}
+        {currentView === "peer-navigator" && (
+          <PeerNavigatorView />
         )}
 
       </main>
