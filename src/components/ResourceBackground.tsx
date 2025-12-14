@@ -27,14 +27,14 @@ interface ResourceBackgroundProps {
   onResourceClick?: (index: number) => void;
 }
 
-export const ResourceBackground = ({ 
-  phase, 
+export const ResourceBackground = ({
+  phase,
   organizedCount = 0,
   activeResourceIndex,
   completedResources = [],
   onResourceClick,
 }: ResourceBackgroundProps) => {
-  
+
   // Positions for floating state
   const floatingPositions = [
     { top: "10%", left: "5%" },
@@ -69,9 +69,9 @@ export const ResourceBackground = ({
 
   // Matching phase positions (matched ones at top center, others fade out)
   const matchingPositions = [
-    { top: "100px", left: "calc(50% - 280px)" }, // Matched 1
-    { top: "100px", left: "calc(50% - 10px)", transform: "translateX(-50%)" }, // Matched 2
-    { top: "170px", left: "calc(50% - 10px)", transform: "translateX(-50%)" }, // Matched 3
+    { top: "15%", left: "50%", transform: "translate(-160%, 0)" }, // Matched 1 (Left)
+    { top: "15%", left: "50%", transform: "translate(-50%, 0)" },  // Matched 2 (Center)
+    { top: "15%", left: "50%", transform: "translate(60%, 0)" },   // Matched 3 (Right)
     // Others scattered faded
     { top: "35%", left: "5%", opacity: 0.3 },
     { top: "40%", right: "8%", opacity: 0.3 },
@@ -93,7 +93,7 @@ export const ResourceBackground = ({
         transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
       };
     }
-    
+
     if (phase === "organizing" && index < organizedCount) {
       const pos = organizedPositions[index];
       return {
@@ -102,7 +102,7 @@ export const ResourceBackground = ({
         transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
       };
     }
-    
+
     const pos = floatingPositions[index];
     return {
       position: "absolute" as const,
@@ -133,10 +133,10 @@ export const ResourceBackground = ({
         const isMatched = phase === "matching" && matchedResourceIndices.includes(index);
         const isActive = activeResourceIndex === index;
         const isCompleted = completedResources.includes(index);
-        
+
         // Hide non-matched resources in matching phase after a delay
         const shouldShow = phase !== "matching" || matchedResourceIndices.includes(index) || index < 8;
-        
+
         if (!shouldShow) return null;
 
         return (

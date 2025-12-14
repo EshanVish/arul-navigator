@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
     --background: 200 40% 98%;
+    /* ... keeping other vars same ... */
     --foreground: 220 20% 10%;
 
     --card: 0 0% 100%;
@@ -54,6 +55,7 @@
   }
 
   .dark {
+    /* ... keeping dark mode vars same ... */
     --background: 220 20% 8%;
     --foreground: 200 20% 95%;
 
@@ -100,11 +102,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
-  }
-
-  h1, h2, h3 {
-    font-family: 'Instrument Serif', serif;
+    font-family: 'Outfit', sans-serif;
   }
 }
 
@@ -115,6 +113,12 @@
 
   .gradient-warm {
     background: var(--gradient-warm);
+  }
+
+  .gradient-fluid {
+    background: linear-gradient(-45deg, #e0f2fe, #f0f9ff, #fefce8, #fdf4ff);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
   }
 
   .shadow-soft {
@@ -147,10 +151,40 @@
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
   }
 }

@@ -12,7 +12,7 @@ interface OnboardingModalProps {
   onResourceAction?: (action: "send" | "skip") => void;
 }
 
-type Step = "welcome" | "basics" | "diagnosis" | "resources";
+type Step = "welcome" | "basics" | "diagnosis" | "explanation" | "resources";
 
 const patientTypes = [
   { value: "patient", label: "Cancer Patient" },
@@ -22,8 +22,8 @@ const patientTypes = [
 
 const stages = ["Stage I", "Stage II", "Stage III", "Stage IV", "Unknown"];
 
-export const OnboardingModal = ({ 
-  onComplete, 
+export const OnboardingModal = ({
+  onComplete,
   onStepChange,
   onPhaseChange,
   activeResourceIndex,
@@ -54,11 +54,17 @@ export const OnboardingModal = ({
     // Notify parent of progress for background animation
     const organizedCount = Math.min(filledFields * 2, 12);
     onStepChange?.(step, organizedCount);
-    
+
     // Update phase based on step
     if (step === "resources") {
       onPhaseChange?.("matching");
+    } else if (step === "explanation") {
+      onPhaseChange?.("organizing");
     } else if (filledFields > 0) {
+      // During intake, we can subtly organize or keep floating
+      // User requested "organized when intake is completed"
+      // So maybe keep floating until explanation?
+      // But original code had progressive organizing. Let's keep progressive but ensure full organization at explanation.
       onPhaseChange?.("organizing");
     } else {
       onPhaseChange?.("floating");
@@ -66,7 +72,7 @@ export const OnboardingModal = ({
   }, [step, filledFields, onStepChange, onPhaseChange]);
 
   const handleNext = () => {
-    const steps: Step[] = ["welcome", "basics", "diagnosis", "resources"];
+    const steps: Step[] = ["welcome", "basics", "diagnosis", "explanation", "resources"];
     const currentIndex = steps.indexOf(step);
     if (currentIndex < steps.length - 1) {
       setStep(steps[currentIndex + 1]);
@@ -76,7 +82,7 @@ export const OnboardingModal = ({
   };
 
   const handleBack = () => {
-    const steps: Step[] = ["welcome", "basics", "diagnosis", "resources"];
+    const steps: Step[] = ["welcome", "basics", "diagnosis", "explanation", "resources"];
     const currentIndex = steps.indexOf(step);
     if (currentIndex > 0) {
       setStep(steps[currentIndex - 1]);
@@ -87,12 +93,12 @@ export const OnboardingModal = ({
   if (step === "resources" && activeResourceIndex !== null && activeResourceIndex !== undefined) {
     const matchedIndex = matchedResourceIndices[activeResourceIndex];
     const resource = resources[matchedIndex];
-    
+
     return (
       <div className="bg-card rounded-2xl shadow-soft p-6 w-full max-w-lg animate-scale-in">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <div 
+            <div
               className="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
               style={{ backgroundColor: resource.color }}
             >
@@ -118,9 +124,9 @@ export const OnboardingModal = ({
           </div>
 
           <div className="flex gap-3 pt-2">
-            <Button 
-              variant="outline" 
-              onClick={handleBack} 
+            <Button
+              variant="outline"
+              onClick={handleBack}
               className="flex-1"
             >
               Previous
@@ -136,7 +142,7 @@ export const OnboardingModal = ({
               onClick={() => onResourceAction?.("send")}
               className="flex-1"
             >
-              Confirm
+              Send Email
             </Button>
           </div>
         </div>
@@ -156,6 +162,24 @@ export const OnboardingModal = ({
     );
   }
 
+  // Explanation Step
+  if (step === "explanation") {
+    return (
+      <div className="bg-card rounded-2xl shadow-soft p-8 w-full max-w-md animate-scale-in text-center">
+        <h2 className="text-2xl font-serif text-foreground mb-4">
+          Here to Support You
+        </h2>
+        <p className="text-foreground leading-relaxed mb-6">
+          Your agent is here to support you with navigating your cancer journey.
+          We will draft and send emails on your behalf to connect you with resources to get started.
+        </p>
+        <Button onClick={handleNext} size="lg" className="w-full">
+          Let's Go
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-card rounded-2xl shadow-soft p-8 w-full max-w-md animate-scale-in">
       {step === "welcome" && (
@@ -169,7 +193,6 @@ export const OnboardingModal = ({
             </p>
           </div>
           <div className="pt-4">
-            <p className="text-lg text-foreground mb-6">Let's start fresh</p>
             <Button onClick={handleNext} size="lg" className="w-full">
               Get Started
             </Button>
